@@ -1,0 +1,30 @@
+<md-dialog class="page" aria-label="Comment Form" ng-cloak>
+  <form name="formComment">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Comment Form</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block">
+          <label>comment</label>
+          <textarea required ng-model="textComment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <div ng-messages="password.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="sendComment(textComment)" ng-disabled="formComment.$invalid">
+        Post
+      </md-button>
+      <md-button ng-click="cancel()">
+       Cancel
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

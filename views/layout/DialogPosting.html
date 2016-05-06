@@ -1,0 +1,58 @@
+<md-dialog class="page" aria-label="Posting Form" ng-cloak>
+  <form name="formPosting">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Posting Form</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block">
+          <label>Title</label>
+          <input required name="title" ng-model="title">
+          <div ng-messages="formPosting.title.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Price: {{price | currency:"Rp ":0}}</label>
+          <input required name="price" id="price" ng-model="price">
+          <div ng-messages="formPosting.price.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Desciption</label>
+          <textarea required ng-model="desciption" md-maxlength="350" rows="5" md-select-on-focus></textarea>
+          <div ng-messages="formPosting.desciption.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Category</label>
+          <md-chips
+            class="md-block"
+            ng-model="tag"
+            md-max-chips="5"
+            placeholder="Add an tag"
+            md-enable-chip-edit="true"
+            delete-button-label="Remove Tag">
+          </md-chips>
+          <div ng-messages="formPosting.tag.$error">
+            <div ng-message="md-max-chips">You reached the maximum amount of chips</div>
+          </div>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="sendPosting(title,tag,desciption,price)" ng-disabled="formPosting.$invalid">
+        Post
+      </md-button>
+      <md-button ng-click="cancel()">
+       Cancel
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

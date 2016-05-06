@@ -1,0 +1,22 @@
+<div ng-controller="AppCtrl" layout="column" ng-cloak>
+  <md-content layout-padding>
+    <form name="formLogin">
+      <md-input-container class="md-block">
+        <label>username</label>
+        <input required name="clientName" ng-model="username">
+        <div ng-messages="username.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>password</label>
+        <input required type="password" ng-model="password"/>
+        <div ng-messages="password.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-button  ng-click='BtnLogin(username,password)' style="width:98%" ng-disabled="formLogin.$invalid" class="md-raised md-primary" type="submit">Login</md-button>
+      <md-button style="width:98%" class="md-raised md-primary" href="#/register">Register</md-button>
+    </form>
+  </md-content>
+</div>

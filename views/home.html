@@ -1,0 +1,20 @@
+<div id="home">
+  <md-card ng-repeat="data in datas">
+    <md-card-title>
+      <md-card-title-text>
+        <a class="md-headline" ng-href="#/article/{{data._id}}">{{data.title}}</a>
+        <span class="md-subhead">
+          <i class="fa fa-clock-o"> {{data.date | date:'dd-MMM-yyyy'}}</i>
+          <a class="md-subhead" ng-href="#/users/{{data.author}}"><i class="fa fa-user"> {{data.author}}</i></a>
+        </span>
+      </md-card-title-text>
+      <md-card-title-media>
+        <div class="md-media-md card-media"></div>
+      </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button class="md-primary md-hue-1"><i class="fa fa-thumbs-o-up"> {{data.vote}} </i></md-button>
+      <md-button class="md-primary md-hue-1"><i class="fa fa-comment-o"> {{data.comment}}</i></md-button>
+    </md-card-actions>
+  </md-card>
+</div>

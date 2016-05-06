@@ -1,0 +1,31 @@
+<div ng-controller="AppCtrl" ng-cloak >
+  <md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="100" layout="column">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{data.username}}</span>
+            <div ng-if="auth.isLoggedIn() == data.username">
+              <span ng-if="data.email" class="md-subhead">Email: {{data.email}}</span>
+              <span ng-if="data.phone" class="md-subhead">Phone: {{data.phone}}</span>
+              <span ng-if="data.birthday" class="md-subhead">Birthday: {{data.birthday | date:'dd-MMM-yyyy'}}</span>
+            </div>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"><img src="img\avatar.png" alt="" /></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-subheader class="md-no-sticky">List Article</md-subheader>
+        <md-list-item class="secondary-button-padding " ng-repeat="posts in data.posts">
+          <p>{{posts.title}}</p>
+          <span class="md-subhead">{{posts.date | date:'dd-MMM-yyyy'}}</span>
+          <md-button class="md-secondary md-raised" ng-href="#/article/{{posts.id}}">Read More</md-button>
+        </md-list-item>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </md-content>
+</div>

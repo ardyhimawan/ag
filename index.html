@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html ng-app="toko" ng-controller="MainCtrl">
+  <head>
+    <meta charset="utf-8">
+    <title>{{page.title()}}</title>
+    <!-- <link rel="stylesheet" href="/css/bootstap.min.css" media="screen" title="no title" charset="utf-8"> -->
+    <link rel="stylesheet" href="css/angular-material.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="bower_components/xpull/xpull.css">
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/jquery.price_format.2.0.js"></script>
+    <script src="js/angular/angular.js"></script>
+    <script src="js/angular/angular-route.js"></script>
+    <script src="js/angular/angular-animate.js"></script>
+    <script src="js/angular/angular-material.min.js"></script>
+    <script src="js/angular/angular-aria.js"></script>
+    <script src="js/angular/angular-messages.js"></script>
+    <script src="js/angular/directive.js"></script>
+    <script src="js/angular/app.js"></script>
+    <script src="js/angular/controller.js"></script>
+    <script src="js/angular/directive.js"></script>
+    <script src="bower_components/xpull/xpull.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+    <div ng-controller="AppCtrl" layout="column" layout-fill ng-cloak>
+
+      <md-toolbar md-scroll-shrink ng-if="true">
+
+        <div class="md-toolbar-tools">
+          <button class="md-icon-button md-button md-ink-ripple" ng-click="toggleLeft()" type="button"><i class="fa fa-bars"></i></button>
+          <!-- <h3 layout="column">
+            {{page.title()}}
+          </h3> -->
+          <span flex>{{page.title()}}</span>
+          <!-- <button class="md-icon-button md-button md-ink-ripple" ng-include="layout/header-right.html" type="button">
+            <i class="fa fa-angle-double-down"></i>
+          </button> -->
+          <div ng-if="page.title() == 'Home'">
+            <md-menu md-offset="0 -7">
+              <md-button class="md-icon-button" aria-label="option" ng-click="$mdOpenMenu($event)">
+                <md-icon class="fa fa-sort-desc"></md-icon>
+              </md-button>
+              <md-menu-content width="4">
+                <md-menu-item>
+                  <md-button  ng-click="showDialogPosting($event)">
+                    <div layout="row" flex>
+                      <p flex>Posting</p>
+                      <md-icon md-menu-align-target class="fa fa-pencil" style="margin: auto 3px auto 0;"></md-icon>
+                    </div>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ng-href="#/home/most/vote">
+                    <div layout="row" flex>
+                      <p flex>Most Vote</p>
+                      <md-icon md-menu-align-target class="fa fa-thumbs-o-up" style="margin: auto 3px auto 0;"></md-icon>
+                    </div>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ng-href="#/home/most/comment">
+                    <div layout="row" flex>
+                      <p flex>Most Comment</p>
+                      <md-icon md-menu-align-target class="fa fa-comments-o" style="margin: auto 3px auto 0;"></md-icon>
+                    </div>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+          </div>
+        </div>
+      </md-toolbar>
+
+      <md-sidenav
+          class="md-sidenav-left"
+          md-component-id="left"
+          md-disable-backdrop
+          md-whiteframe="4">
+        <md-toolbar class="md-theme-indigo">
+          <h1 class="md-toolbar-tools">Menu</h1>
+        </md-toolbar>
+        <md-content layout-padding ng-controller="LeftCtrl">
+          <md-list-item ng-href="#/home" ng-click="close()">
+           <p>Dasboard</p>
+           <i class="fa fa-home fa-2x"> {{data.vote}} </i>
+          </md-list-item>
+          <md-list-item ng-href="#/users/{{auth.isLoggedIn()}}" ng-click="close()">
+           <p>Profile</p>
+           <i class="fa fa-user fa-2x"></i>
+          </md-list-item>
+          <md-list-item ng-if="auth.isLoggedIn() !== false" ng-href="#/logout" ng-click="close()">
+           <p>Sign Out</p>
+           <i class="fa fa-sign-out fa-2x"></i>
+          </md-list-item>
+          <md-list-item ng-if="auth.isLoggedIn() == false" ng-href="#/login" ng-click="close()">
+           <p>Sign In</p>
+           <i class="fa fa-sign-in fa-2x"></i>
+          </md-list-item>
+          <md-divider></md-divider>
+        </md-content>
+      </md-sidenav>
+
+
+      <md-content>
+
+
+        <div class="page" flex="auto" ng-xpull="reload()" ng-view>
+
+        </div>
+
+      </md-content>
+
+    </div>
+
+  </body>
+</html>

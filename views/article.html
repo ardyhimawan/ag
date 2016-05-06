@@ -1,0 +1,106 @@
+<div id="article">
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <img src="#"/>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-title">{{data.author}}</span>
+        <span class="md-subhead">{{data.date | date:'dd-MMM-yyyy'}}</span>
+      </md-card-header-text>
+    </md-card-header>
+    <img ng-src="https://material.angularjs.org/latest/img/icons/angular-logo.svg" class="md-card-image" alt="Washed Out">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{data.title}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <p>{{data.desciption | limitTo: 15}}</p>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="start center">
+      <md-card-icon-actions>
+        <md-button id="{{data._id}}" class="vote md-icon-button" aria-label="Like">
+          <md-icon class="fa fa-1x fa-thumbs-up"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Comment">
+          <md-icon class="fa fa-1x fa-comment"></md-icon>
+        </md-button>
+      </md-card-icon-actions>
+
+      <!-- menu dopdown -->
+      <div ng-if="auth.isLoggedIn() == data.author">
+        <md-menu md-offset="0 -7">
+          <md-button class="md-icon-button" aria-label="option" ng-click="$mdOpenMenu($event)">
+            <md-icon class="fa fa-sort-desc"></md-icon>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button ng-click="showDialogEditPosting($event)">
+                  <div layout="row" flex>
+                    <p flex>Edit</p>
+                    <md-icon md-menu-align-target class="fa fa-edit" style="margin: auto 3px auto 0;"></md-icon>
+                  </div>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="delete()">
+                  <div layout="row" flex>
+                    <p flex>Delete</p>
+                    <md-icon md-menu-align-target class="fa fa-trash" style="margin: auto 3px auto 0;"></md-icon>
+                  </div>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+
+    </md-card-actions>
+  </md-card>
+  <!-- untuk comment -->
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Comment</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-button flex ng-click="showDialogComment($event)" class="md-raised md-primary">Post Comment</md-button>
+    <div class="comment" ng-repeat="comment in comment">
+      <md-card-header>
+        <md-card-avatar>
+          <img src="#"/>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">{{comment.username}}</span>
+          <span class="md-subhead">{{comment.date | date:'dd-MMM-yyyy'}}</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-content>
+        <p>{{comment.desciption}}</p>
+      </md-card-content>
+    </div>
+  </md-card>
+  <div ng-if="nomore === true" layout="row" style="width: 100%">
+    <md-button flex ng-click="loadmore()" class="md-raised md-primary">Load More</md-button>
+  </div>
+</div>
+<script type="text/javascript">
+  $('#article').on('click', '.vote', function() {
+    var id = $(this).attr('id'),
+        token = angular.element('#article').scope().token();
+    $.ajax({
+      url: 'http://localhost:3000/api/article/vote/'+id,
+      type: 'GET',
+      data: {token:token}
+    })
+    .done(function(data) {
+      if (data.success === true) {
+        angular.element('#article').scope().toast.show(data.message, 'success-toast');
+      }else {
+        angular.element('#article').scope().toast.show(data.message, 'error-toast');
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    });
+
+  });
+</script>

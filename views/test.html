@@ -1,0 +1,32 @@
+<div layout="column" flex="100" ng-cloak>
+  <md-content layout-padding>
+    <form name="formRegister">
+      <md-input-container class="md-block">
+        <label>Username</label>
+        <input required name="clientName" ng-model="username">
+        <div ng-messages="username.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input required type="email" ng-model="email"/>
+        <div ng-messages="email.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <input required type="password" ng-model="password"/>
+        <div ng-messages="password.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-datepicker ng-model="datepicker" md-placeholder="Enter date"></md-datepicker>
+      <div layout-lg="row" layout="column">
+        <md-button flex="100" ng-click='BtnLogin(username,password)' ng-disabled="formRegister.$invalid" class="md-raised md-primary" type="submit">Register</md-button>
+        <md-button flex="100" class="md-raised md-primary" href="#/login">Login</md-button>
+      </div>
+    </form>
+  </md-content>
+</div>
